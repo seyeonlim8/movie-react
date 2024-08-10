@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Button";
+import styles from "./App.module.css";
 
 function Detail() {
   const [loading, setLoading] = useState(true);
@@ -20,19 +21,19 @@ function Detail() {
   useEffect(() => {
     getMovie();
   }, []);
-  return (
-    <div>
-      {loading ? (
-        <h1>"Loading..."</h1>
-      ) : (
-        <div>
-          <h2>
-            <Link to="/">Home</Link>
-          </h2>
 
+  return (
+    <div className={styles.container}>
+      {loading ? (
+        <div className={styles.loading}>Loading...</div>
+      ) : (
+        <div className={styles.detail-page}>
+          <Link to="/">
+            <Button text="Home" />
+          </Link>
           <h1>Details</h1>
+          <img src={details.large_cover_image} alt={details.title_long} />
           <h2>{details.title_long}</h2>
-          <img src={details.large_cover_image} />
           <div>
             <h3>Year: {details.year}</h3>
             <h3>Rating: {details.rating}</h3>
